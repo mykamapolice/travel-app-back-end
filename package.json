@@ -1,0 +1,34 @@
+{
+  "name": "travel-app-back-end",
+  "version": "1.0.0",
+  "description": "rest api server for travel-app",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf build/ && tsc",
+    "start": "nodemon src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mykamapolice/travel-app-back-end.git"
+  },
+  "author": "Vasiliy Suhovenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mykamapolice/travel-app-back-end/issues"
+  },
+  "homepage": "https://github.com/mykamapolice/travel-app-back-end#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.4",
+    "mongoose": "^5.12.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.11",
+    "@types/mongodb": "^3.6.9",
+    "@types/mongoose": "^5.10.3"
+  }
+}
