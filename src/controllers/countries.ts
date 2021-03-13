@@ -29,9 +29,11 @@ const createCountry = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const getAllCountries = (req: Request, res: Response, next: NextFunction) => {
-  const { fields } = req.body;
+  const { fields, page, count } = req.body;
 
   Country.find()
+    .skip((page - 1) * count)
+    .limit(count)
     // поля которые необходимо загрузить
     // если первый запуск - "name"
     // иначе "name capital photo"
@@ -39,8 +41,8 @@ const getAllCountries = (req: Request, res: Response, next: NextFunction) => {
     .exec()
     .then((results) =>
       res.status(200).json({
-        countries: results,
         count: results.length,
+        countries: results,
       })
     )
     .catch((error) =>
