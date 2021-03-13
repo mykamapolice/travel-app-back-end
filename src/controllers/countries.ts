@@ -29,10 +29,12 @@ const createCountry = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const getAllCountries = (req: Request, res: Response, next: NextFunction) => {
-  const { fields, page, count } = req.body;
+  const { fields, pageNumber, pageCount } = req.body;
+  const page = pageNumber - 1 || 0;
+  const count = pageCount || 8;
 
   Country.find()
-    .skip((page - 1) * count)
+    .skip(page * count)
     .limit(count)
     // поля которые необходимо загрузить
     // если первый запуск - "name"
