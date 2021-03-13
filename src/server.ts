@@ -3,7 +3,7 @@ import express from 'express';
 import logging from './config/logging';
 import config from './config/config';
 import mongoose from 'mongoose';
-import bookRoutes from './routes/book';
+import countriesRoutes from './routes/countries';
 
 const NAMESPACE = 'Server';
 const app = express();
@@ -48,7 +48,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/books', bookRoutes);
+app.use('/api', countriesRoutes);
 
 app.use((req, res, next) => {
   const err = new Error('not found');
