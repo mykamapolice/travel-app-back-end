@@ -1,5 +1,6 @@
 import http from 'http';
 import express from 'express';
+import cors from 'cors';
 import logging from './config/logging';
 import config from './config/config';
 import mongoose from 'mongoose';
@@ -7,6 +8,7 @@ import countriesRoutes from './routes/countries';
 import userRoutes from './routes/user';
 
 const NAMESPACE = 'Server';
+
 const app = express();
 
 const server = http.createServer(app);
@@ -34,6 +36,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 

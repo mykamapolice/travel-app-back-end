@@ -12,9 +12,9 @@ const signJWT = (
   const { username } = user;
   const { expireTime, secret, issuer } = config.server.token;
 
-  var timeSinchEpoch = new Date().getTime();
-  var expirationTime = timeSinchEpoch + Number(expireTime) * 100000;
-  var expiresIn = Math.floor(expirationTime / 1000);
+  const timeSinchEpoch = new Date().getTime();
+  const expirationTime = timeSinchEpoch + Number(expireTime) * 100000;
+  const expiresIn = Math.floor(expirationTime / 1000);
 
   const message = `Attempting to sign token for ${username}`;
   logging.info(NAMESPACE, message);

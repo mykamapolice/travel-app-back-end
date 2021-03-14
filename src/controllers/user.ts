@@ -1,10 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import logging from '../config/logging';
-import bcryptjs, { hash } from 'bcryptjs';
+import bcryptjs from 'bcryptjs';
 import mongoose from 'mongoose';
 import User from '../models/user';
 import signJWT from '../utils/signJWT';
-import { sign } from 'jsonwebtoken';
 
 const NAMESPACE = 'User';
 
@@ -49,6 +48,8 @@ const register = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
+// const logout = (req: Request, res: Response, next: NextFunction) => {};
+
 const login = (req: Request, res: Response, next: NextFunction) => {
   let { username, password } = req.body;
 
@@ -79,7 +80,7 @@ const login = (req: Request, res: Response, next: NextFunction) => {
               });
             } else if (token) {
               return res.status(200).json({
-                message: 'Auth Ssuccess',
+                message: 'Auth Success',
                 token,
                 user: users[0],
               });
