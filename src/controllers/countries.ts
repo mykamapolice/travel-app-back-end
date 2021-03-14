@@ -30,6 +30,7 @@ const createCountry = (req: Request, res: Response, next: NextFunction) => {
 
 const getAllCountries = (req: Request, res: Response, next: NextFunction) => {
   const { fields, pageNumber, pageCount } = req.body;
+
   const page = pageNumber - 1 || 0;
   const count = pageCount || 8;
 

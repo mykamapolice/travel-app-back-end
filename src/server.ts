@@ -4,9 +4,14 @@ import logging from './config/logging';
 import config from './config/config';
 import mongoose from 'mongoose';
 import countriesRoutes from './routes/countries';
+import userRoutes from './routes/user';
 
 const NAMESPACE = 'Server';
 const app = express();
+
+const server = http.createServer(app);
+const host = config.server.hostname;
+const port = config.server.port;
 
 mongoose
   .connect(config.mongo.url, config.mongo.options)
@@ -48,6 +53,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/users', userRoutes);
 app.use('/api', countriesRoutes);
 
 app.use((req, res, next) => {
@@ -55,10 +61,6 @@ app.use((req, res, next) => {
 
   return res.status(404).json({ message: err.message });
 });
-
-const server = http.createServer(app);
-const host = config.server.hostname;
-const port = config.server.port;
 
 server.listen(config.server.port, () => {
   logging.info(NAMESPACE, `Server runnig on ${host}:${port}`);
