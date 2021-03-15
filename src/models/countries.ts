@@ -1,16 +1,22 @@
 import mongoose, { Schema } from 'mongoose';
-import Icountry from '../interfaces/countries';
+import ICountry from '../interfaces/countries';
 
 const CountrySchema = new Schema(
   {
-    name: { type: String, required: true },
-    capital: { type: String, required: true },
+    nameEN: { type: String, required: true },
+    nameRU: { type: String, required: true },
+    nameBE: { type: String, required: true },
+    capital: {
+      en: { type: String, required: true },
+      ru: { type: String, required: true },
+      be: { type: String, required: true },
+    },
     photo: { type: String, required: true },
 
     details: {
-      info: { type: Array, required: false },
+      info: { type: Array, required: true },
+      views: { type: Array, required: true },
       videoURL: { type: String, required: false },
-      views: { type: Array, required: false },
 
       mapCoords: {
         center: {
@@ -31,8 +37,8 @@ const CountrySchema = new Schema(
   }
 );
 
-CountrySchema.post<Icountry>('save', function () {
+CountrySchema.post<ICountry>('save', function () {
   this.extraInformation = 'This is some extra info';
 });
 
-export default mongoose.model<Icountry>('Country', CountrySchema);
+export default mongoose.model<ICountry>('Country', CountrySchema);

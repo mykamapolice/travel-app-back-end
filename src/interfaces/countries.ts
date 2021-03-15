@@ -30,8 +30,10 @@ interface Details {
   mapCoords: Location;
 }
 
-export default interface Country extends Document {
-  name: string;
+export default interface ICountry extends Document {
+  nameEN: string;
+  nameRU: string;
+  nameBE: string;
   capital: string;
   photo: string;
   details: Details;

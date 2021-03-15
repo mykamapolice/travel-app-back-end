@@ -29,18 +29,13 @@ const createCountry = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const getAllCountries = (req: Request, res: Response, next: NextFunction) => {
-  const { fields, pageNumber, pageCount } = req.body;
-
-  const page = pageNumber - 1 || 0;
-  const count = pageCount || 8;
+  const page: number | 0 = Number(req.params.page) || 0;
+  const count: number = 8;
 
   Country.find()
     .skip(page * count)
     .limit(count)
-    // поля которые необходимо загрузить
-    // если первый запуск - "name"
-    // иначе "name capital photo"
-    .select(fields)
+    .select('nameEN nameRU nameBE capital photo')
     .exec()
     .then((results) =>
       res.status(200).json({
@@ -57,7 +52,9 @@ const getAllCountries = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const getCountryInfo = (req: Request, res: Response, next: NextFunction) => {
-  Country.find({ name: req.params.name })
+  const { name, lang } = req.params;
+
+  Country.find({ $or: [{ nameEN: name }, { nameRU: name }, { nameBE: name }] })
     .select('details')
     .exec()
     .then((results) => {
