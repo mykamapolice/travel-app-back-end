@@ -57,15 +57,16 @@ const getAllCountries = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const getCountryInfo = (req: Request, res: Response, next: NextFunction) => {
-  Country.find({ name: req.body.name })
+  Country.find({ name: req.params.name })
     .select('details')
     .exec()
-    .then((results) =>
-      res.status(200).json({
-        countryInfo: results,
-        count: results.length,
-      })
-    )
+    .then((results) => {
+      const { details } = results[0];
+
+      return res.status(200).json({
+        details,
+      });
+    })
     .catch((error) =>
       res.status(500).json({
         message: error.message,

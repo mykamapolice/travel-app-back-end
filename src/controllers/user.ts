@@ -48,8 +48,6 @@ const register = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-// const logout = (req: Request, res: Response, next: NextFunction) => {};
-
 const login = (req: Request, res: Response, next: NextFunction) => {
   let { username, password } = req.body;
 
@@ -99,7 +97,7 @@ const login = (req: Request, res: Response, next: NextFunction) => {
 
 const getAllUsers = (req: Request, res: Response, next: NextFunction) => {
   User.find()
-    .select('-password')
+    .select('username')
     .exec()
     .then((users) =>
       res.status(200).json({
