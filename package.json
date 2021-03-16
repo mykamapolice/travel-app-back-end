@@ -2,7 +2,7 @@
   "name": "travel-app-back-end",
   "version": "1.0.0",
   "description": "rest api server for travel-app",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "build": "rm -rf build/ && tsc",
     "start": "nodemon src/server.ts"
