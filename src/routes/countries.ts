@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post('/create/country', controller.createCountry);
 router.get('/get/countries/:page', controller.getAllCountries);
-router.get('/get/countryInfo/:name/:lang', controller.getCountryInfo);
+router.get('/get/countryInfo/:name', controller.getCountryInfo);
 
 export = router;

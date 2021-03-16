@@ -52,7 +52,7 @@ const getAllCountries = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const getCountryInfo = (req: Request, res: Response, next: NextFunction) => {
-  const { name, lang } = req.params;
+  const { name } = req.params;
 
   Country.find({ $or: [{ nameEN: name }, { nameRU: name }, { nameBE: name }] })
     .select('details')
