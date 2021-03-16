@@ -3,11 +3,13 @@ import mongoose from 'mongoose';
 import Country from '../models/countries';
 
 const createCountry = (req: Request, res: Response, next: NextFunction) => {
-  let { name, capital, details, photo } = req.body;
+  let { nameEN, nameRU, nameBE, capital, details, photo } = req.body;
 
   const country = new Country({
     _id: new mongoose.Types.ObjectId(),
-    name,
+    nameEN,
+    nameRU,
+    nameBE,
     capital,
     details,
     photo,

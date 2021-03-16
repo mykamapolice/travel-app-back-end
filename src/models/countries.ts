@@ -14,7 +14,7 @@ const CountrySchema = new Schema(
     photo: { type: String, required: true },
 
     details: {
-      info: { type: Array, required: true },
+      info: { type: Object, required: true },
       views: { type: Array, required: true },
       videoURL: { type: String, required: false },
 

@@ -1,41 +1,46 @@
 import { Document } from 'mongoose';
+interface ILocalization {
+  en: string;
+  ru: string;
+  be: string;
+}
 
-type Coords = {
+type ICoords = {
   latitude: number;
   longitude: number;
 };
 
-type Raiting = {
+type IRaiting = {
   name: string;
   rating: number;
 };
 
-type View = {
+type IView = {
   imgURL: string;
-  viewName: string;
-  about: string;
+  viewName: ILocalization;
+  about: ILocalization;
   averageRating: number;
-  usersRating: Raiting[];
+  usersRating: IRaiting[];
 };
 
-interface Location {
-  center: Coords;
-  capital: Coords;
+interface ILocation {
+  center: ICoords;
+  capital: ICoords;
 }
 
-interface Details {
-  info: string[];
+interface IDetails {
+  info: ILocalization;
   videoURL: string;
-  views: View[];
-  mapCoords: Location;
+  views: IView[];
+  mapCoords: ILocation;
 }
 
 export default interface ICountry extends Document {
   nameEN: string;
   nameRU: string;
   nameBE: string;
-  capital: string;
+  capital: ILocalization;
   photo: string;
-  details: Details;
+  details: IDetails;
   extraInformation: string;
 }
