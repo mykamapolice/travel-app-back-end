@@ -4,8 +4,9 @@
   "description": "rest api server for travel-app",
   "main": "server.js",
   "scripts": {
+    "start": "node server",
     "build": "rm -rf build/ && tsc",
-    "start": "nodemon src/server.ts"
+    "dev": "nodemon src/server.ts"
   },
   "repository": {
     "type": "git",
