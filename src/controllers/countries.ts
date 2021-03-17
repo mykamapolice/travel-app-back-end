@@ -37,7 +37,7 @@ const getAllCountries = (req: Request, res: Response, next: NextFunction) => {
   Country.find()
     .skip(page * count)
     .limit(count)
-    .select('nameEN nameRU nameBE capital photo')
+    .select('nameEN nameRU nameBE capital photo currencyCode')
     .exec()
     .then((results) =>
       res.status(200).json({
