@@ -37,6 +37,10 @@ const register = (req: Request, res: Response, next: NextFunction) => {
       .then((user) =>
         res.status(201).json({
           user,
+          message: {
+            text: 'User authorized',
+            status: 201,
+          },
         })
       )
       .catch((error) =>
@@ -64,6 +68,10 @@ const login = (req: Request, res: Response, next: NextFunction) => {
         if (error) {
           logging.error(NAMESPACE, error.message, error);
 
+          return res.status(401).json({
+            message: 'Unauthorized',
+          });
+        } else if (!result) {
           return res.status(401).json({
             message: 'Unauthorized',
           });
