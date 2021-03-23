@@ -4,7 +4,7 @@ dotenv.config();
 
 enum Mongo {
   user = 'svdfsdev',
-  password = 'rs-team-41',
+  password = '',
   host = 'travel-app.nkkga.mongodb.net/travel-app?retryWrites=true&w=majority',
 }
 
