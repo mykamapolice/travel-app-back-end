@@ -15,8 +15,17 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-const register = (req: Request, res: Response, next: NextFunction) => {
+const register = async (req: Request, res: Response, next: NextFunction) => {
   let { username, password } = req.body;
+
+  const users = await User.find({ username: username }).exec();
+
+  if (users.length > 0) {
+    return res.status(401).json({
+      message: 'Such user already exist',
+      count: users.length,
+    });
+  }
 
   bcryptjs.hash(password, 10, (hashError, hash) => {
     if (hashError) {
@@ -39,7 +48,6 @@ const register = (req: Request, res: Response, next: NextFunction) => {
           user,
           message: {
             text: 'User authorized',
-            status: 201,
           },
         })
       )
@@ -104,7 +112,7 @@ const login = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const getAllUsers = (req: Request, res: Response, next: NextFunction) => {
-  User.find()
+  User.find({ username: req.body.username })
     .select('username')
     .exec()
     .then((users) =>

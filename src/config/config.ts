@@ -2,6 +2,18 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+enum Mongo {
+  user = 'svdfsdev',
+  password = 'rs-team-41',
+  host = 'travel-app.nkkga.mongodb.net/travel-app?retryWrites=true&w=majority',
+}
+
+enum Token {
+  expireTime = 3600,
+  issuer = 'superIssuer',
+  secret = 'superSecret',
+}
+
 const MONGO_OPTIONS = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -12,11 +24,9 @@ const MONGO_OPTIONS = {
   retryWrites: false,
 };
 
-const MONGO_USER_NAME = process.env.MONGO_USER_NAME || 'svdfsdev';
-const MONGO_PASSWORD = process.env.MONGO_PASSWORD || 'rs-team-41';
-const MONGO_HOST =
-  process.env.MONGO_URL ||
-  'travel-app.nkkga.mongodb.net/travel-app?retryWrites=true&w=majority';
+const MONGO_USER_NAME = process.env.MONGO_USER_NAME || Mongo.user;
+const MONGO_PASSWORD = process.env.MONGO_PASSWORD || Mongo.password;
+const MONGO_HOST = process.env.MONGO_URL || Mongo.host;
 
 const MONGO = {
   host: MONGO_HOST,
@@ -29,9 +39,10 @@ const MONGO = {
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 3001;
 
-const TOKEN_EXPIRETIME = process.env.SERVER_TOKEN_EXPIRETIME || 3600;
-const TOKEN_ISSUER = process.env.SERVER_TOKEN_ISSUER || 'superIssuer';
-const TOKEN_SECRET = process.env.SERVER_TOKEN_SECRET || 'superSecret';
+const TOKEN_EXPIRETIME =
+  process.env.SERVER_TOKEN_EXPIRETIME || Token.expireTime;
+const TOKEN_ISSUER = process.env.SERVER_TOKEN_ISSUER || Token.issuer;
+const TOKEN_SECRET = process.env.SERVER_TOKEN_SECRET || Token.secret;
 
 const SERVER = {
   hostname: HOST,

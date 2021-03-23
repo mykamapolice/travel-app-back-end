@@ -8,7 +8,7 @@ const NAMESPACE = 'Auth';
 const extractJWT = (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'Validated token');
 
-  let token = req.headers.authorization?.split(' ')[1]; // посмотреть
+  let token = req.headers.authorization?.split(' ')[1];
 
   if (token) {
     const { secret } = config.server.token;

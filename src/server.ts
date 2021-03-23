@@ -60,14 +60,14 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/users', userRoutes);
-app.use('/api', countriesRoutes);
-
 app.use((req, res, next) => {
   const err = new Error('not found');
 
   return res.status(404).json({ message: err.message });
 });
+
+app.use('/users', userRoutes);
+app.use('/api', countriesRoutes);
 
 server.listen(config.server.port, () => {
   logging.info(NAMESPACE, `Server runnig on ${host}:${port}`);

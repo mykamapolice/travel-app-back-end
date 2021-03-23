@@ -1,9 +1,10 @@
 import { Document } from 'mongoose';
-interface ILocalization {
+
+type ILocalization = {
   en: string;
   ru: string;
   be: string;
-}
+};
 
 type ICoords = {
   latitude: number;

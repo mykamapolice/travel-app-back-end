@@ -1,11 +1,13 @@
 import express from 'express';
 import controller from '../controllers/countries';
+import { Routes } from '../utils/routes';
 
 const router = express.Router();
 
-// router.post('/update/view', controller.updateView);
-router.post('/create/country', controller.createCountry);
-router.get('/get/countries/:page', controller.getAllCountries);
-router.get('/get/countryInfo/:name', controller.getCountryInfo);
+const { createCountry, getAllCountries, getCountryInfo } = controller;
+
+router.post(Routes.createCountry, createCountry);
+router.get(Routes.allCountries, getAllCountries);
+router.get(Routes.countryDetails, getCountryInfo);
 
 export = router;
