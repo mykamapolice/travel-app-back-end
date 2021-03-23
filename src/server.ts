@@ -10,10 +10,15 @@ import userRoutes from './routes/user';
 const NAMESPACE = 'Server';
 
 const app = express();
+app.use(cors());
 
 const server = http.createServer(app);
 const host = config.server.hostname;
 const port = config.server.port;
+
+app.get('/', function (req, res) {
+  res.send('Travel-app');
+});
 
 mongoose
   .connect(config.mongo.url, config.mongo.options)
@@ -36,7 +41,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -56,14 +60,14 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/users', userRoutes);
-app.use('/api', countriesRoutes);
-
 app.use((req, res, next) => {
   const err = new Error('not found');
 
   return res.status(404).json({ message: err.message });
 });
+
+app.use('/users', userRoutes);
+app.use('/api', countriesRoutes);
 
 server.listen(config.server.port, () => {
   logging.info(NAMESPACE, `Server runnig on ${host}:${port}`);

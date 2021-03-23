@@ -2,10 +2,11 @@
   "name": "travel-app-back-end",
   "version": "1.0.0",
   "description": "rest api server for travel-app",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "build": "rm -rf build/ && tsc",
-    "start": "nodemon src/server.ts"
+    "start": "node build/server",
+    "dev": "nodemon src/server.ts"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,8 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.4",
-    "mongoose": "^5.12.0"
+    "mongoose": "^5.12.0",
+    "typescript": "^4.2.3"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

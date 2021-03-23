@@ -3,11 +3,13 @@ import mongoose from 'mongoose';
 import Country from '../models/countries';
 
 const createCountry = (req: Request, res: Response, next: NextFunction) => {
-  let { name, capital, details, photo } = req.body;
+  let { nameEN, nameRU, nameBE, capital, details, photo } = req.body;
 
   const country = new Country({
     _id: new mongoose.Types.ObjectId(),
-    name,
+    nameEN,
+    nameRU,
+    nameBE,
     capital,
     details,
     photo,
@@ -35,7 +37,7 @@ const getAllCountries = (req: Request, res: Response, next: NextFunction) => {
   Country.find()
     .skip(page * count)
     .limit(count)
-    .select('nameEN nameRU nameBE capital photo')
+    .select('nameEN nameRU nameBE capital photo currencyCode')
     .exec()
     .then((results) =>
       res.status(200).json({

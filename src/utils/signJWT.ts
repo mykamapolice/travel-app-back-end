@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import config from '../config/config';
 import logging from '../config/logging';
 import IUser from '../interfaces/user';
@@ -12,30 +12,29 @@ const signJWT = (
   const { username } = user;
   const { expireTime, secret, issuer } = config.server.token;
 
-  const timeSinchEpoch = new Date().getTime();
+  const timeSinchEpoch: number = new Date().getTime();
   const expirationTime = timeSinchEpoch + Number(expireTime) * 100000;
   const expiresIn = Math.floor(expirationTime / 1000);
 
   const message = `Attempting to sign token for ${username}`;
+
   logging.info(NAMESPACE, message);
 
   try {
-    jwt.sign(
-      { username },
-      secret,
-      {
-        issuer,
-        expiresIn,
-        algorithm: 'HS256',
-      },
-      (error, token) => {
-        if (error) {
-          callback(error, null);
-        } else if (token) {
-          callback(null, token);
-        }
+    const user: object = { username };
+    const options: SignOptions = {
+      issuer,
+      expiresIn,
+      algorithm: 'HS256',
+    };
+
+    jwt.sign(user, secret, options, (error, token) => {
+      if (error) {
+        callback(error, null);
+      } else if (token) {
+        callback(null, token);
       }
-    );
+    });
   } catch (error) {
     logging.error(NAMESPACE, error.message, error);
     callback(error, null);
